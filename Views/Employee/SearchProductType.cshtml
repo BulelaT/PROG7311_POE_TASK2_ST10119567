@@ -1,0 +1,59 @@
+﻿@model PROG7311_POE_TASK2_ST10119567.Models.ItemModel
+@{
+    ViewBag.Title = "SearchProductType";
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
+
+<h2 style="font-family: Papyrus">Search Product</h2>
+<link href="~/Content/TableFormat.css" rel="stylesheet">
+<input type="text" id="searchTerm" onkeyup="sItemFunction()" placeholder="Search Type of Product">
+
+@*Items table*@
+<table class="CustomiseTable" id="Products">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date Added</th>
+            <th>Farmer Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.imList)
+        {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Type</td>
+            <td>@item.Price</td>
+            <td>@item.quantity</td>
+            <td>@item.DateAdded</td>
+            <td>@item.FarmerEmail</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function sItemFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchTerm");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("Products");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

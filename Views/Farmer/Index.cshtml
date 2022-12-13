@@ -1,0 +1,34 @@
+﻿
+@model PROG7311_POE_TASK2_ST10119567.Models.ItemModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/FarmerLayout.cshtml";
+}
+
+<h2 style="font-family: Papyrus">Farmer</h2>
+<link href="~/Content/TableFormat.css" rel="stylesheet">
+<table class="CustomiseTable">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.imList)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.Price</td>
+                <td>@item.quantity</td>
+                <td>@item.DateAdded</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+

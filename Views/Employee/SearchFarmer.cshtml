@@ -1,0 +1,111 @@
+﻿
+@model PROG7311_POE_TASK2_ST10119567.Models.ItemModel
+
+@{
+    ViewBag.Title = "SearchFarmer";
+    Layout = "~/Views/Shared/EmployeeLayout.cshtml";
+}
+
+<h2 style="font-family: Papyrus; ">Search Farmer</h2>
+<link href="~/Content/TableFormat.css" rel="stylesheet">
+<input type="text" id="searchTerm" onkeyup="sFarmerFunction()" placeholder="Search for Farmer by Email">
+
+@*Farmer information*@
+
+    <table class="CustomiseTable" id="FarmerInfo">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.fmList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Surname</td>
+                    <td>@item.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+
+    </p>
+    @*Items table*@
+    <table class="CustomiseTable" id="Products">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Type</th>
+                <th>Price</th>
+                <th>Date Added</th>
+                <th>Qunatity</th>
+                <th class="hide">Farmer Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.imList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Type</td>
+                    <td>@item.Price</td>
+                    <td>@item.DateAdded</td>
+                    <td>@item.quantity</td>
+                    <td class="hide">@item.FarmerEmail</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function sFarmerFunction() {
+            // Declare variables
+            var input;
+            var filter;
+            var table;
+            var tr, td;
+            var i;
+            var txtValue;
+            input = document.getElementById("searchTerm");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("FarmerInfo");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+
+            input = document.getElementById("searchTerm");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Products");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+
